@@ -4,7 +4,7 @@ module.exports = {
   /**
    *
    * @param {*} method pg-promise methods
-   * @param {*} queryString raw query string 
+   * @param {*} queryString raw query string
    * @param {*} args arguments of the query string
    * @returns success: query result, error: the query result error code
    */

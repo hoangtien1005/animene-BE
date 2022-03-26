@@ -6,10 +6,9 @@ module.exports = {
     try {
       const { data } = await userModel.findAll()
       return res.json({ data })
-    } catch(err) {
+    } catch (err) {
       return res.json(errorModel())
     }
-    
   },
   getProfile: async (req, res) => {
     try {
@@ -17,11 +16,10 @@ module.exports = {
 
       const { data } = await userModel.findById(id)
 
-      if(!data) return res.json(errorModel(404, "User not found."))
+      if (!data) return res.json(errorModel(404, "User not found."))
 
       return res.json({ data })
-
-    } catch(err) {
+    } catch (err) {
       return res.json(errorModel())
     }
   }
