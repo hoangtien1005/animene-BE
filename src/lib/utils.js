@@ -11,6 +11,7 @@ module.exports = {
         const genHash = await bcrypt.hash(password, 10).then(res => res);
         return genHash;
     },
+    
 
     /**
      * 
@@ -22,6 +23,8 @@ module.exports = {
         const isValid = await bcrypt.compare(password, db_password).then(res => res);
         return isValid;
     },
+
+
     /**
      * 
      * @param {*} payload { email, id } user's email and id

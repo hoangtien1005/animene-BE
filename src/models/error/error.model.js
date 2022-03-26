@@ -1,7 +1,7 @@
 /**
  * 
  * @param {*} code http error code
- * @param {*} message the message of the error
+ * @param {*} message the message for the error
  * @returns standard error response object
  */
 

@@ -10,14 +10,4 @@ const conf = {
 }
 
 const db = pgp(conf)
-const queryDB = async ({ method, queryString, args }) => {
-  try {
-    const data = await db[method](queryString, args)
-    return { data }
-  } catch (err) {
-    const { code, message } = err
-    
-    return { error: { code: code, message: message } }
-  }
-}
-module.exports = { db, pgp, queryDB }
+module.exports = { db, pgp }
