@@ -40,7 +40,7 @@ module.exports = {
       if (!email || !password)
         return res.json(errorModel(400, "Missing required credentials."))
 
-      const { data: user } = await userModel.findByEmail(email)
+          const { data: user } = await userModel.findByEmail(email)
 
       if (!user) return res.json(errorModel(400, "User not found."))
 
