@@ -1,4 +1,4 @@
-const { db } = require("../config/db")
+const { db } = require("../config/db.config")
 const { ERROR_CODE } = require("../constants")
 module.exports = {
   /**

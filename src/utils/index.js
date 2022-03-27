@@ -30,12 +30,16 @@ module.exports = {
    * @param {*} payload { email, id } user's email and id
    * @returns token
    */
-  issueJWT: (payload) => {
-    const expiresIn = "1d"
+  issueJWT: ({ email, id }) => {
+    const expiresIn = "30s" // for testing
+    // const expiresIn = "1d"
 
-    const _payload = { ...payload, iat: Date.now() }
+    const payload = {
+      sub: { email, id },
+      iat: Math.floor(Date.now())
+    }
 
-    const signedToken = jwt.sign(_payload, SECRET, { expiresIn })
+    const signedToken = jwt.sign(payload, SECRET, { expiresIn })
 
     return signedToken
   }

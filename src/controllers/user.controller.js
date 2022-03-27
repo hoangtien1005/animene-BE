@@ -1,6 +1,6 @@
-const userModel = require("../../models/user/user.model")
-const errorModel = require("../../models/error/error.model")
-const { ERROR_CODE } = require("../../constants")
+const userModel = require("../models/user.model")
+const errorModel = require("../models/error.model")
+const { ERROR_CODE } = require("../constants")
 module.exports = {
   findAll: async (req, res) => {
     try {

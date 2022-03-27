@@ -1,5 +1,6 @@
 const express = require("express")
-// const passport = require('./middlewares/passport');
+const passport = require("./middlewares/passport.middleware")
+const errorHandling = require("./middlewares/errorHandling.middleware")
 const cors = require("cors")
 const route = require("./routes")
 require("dotenv").config()
@@ -11,8 +12,9 @@ app.use(express.json())
 
 app.use(cors())
 
-// passport(app);
+passport(app)
 route(app)
+errorHandling(app)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

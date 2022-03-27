@@ -1,6 +1,6 @@
-const { db, pgp } = require("../../config/db")
-const { STATE } = require("../../constants")
-const { queryDB } = require("../../services/database")
+const { db, pgp } = require("../config/db.config")
+const { STATE } = require("../constants")
+const { queryDB } = require("../services/database.service")
 
 class UserModel {
   table = new pgp.helpers.TableName({ table: "User" })

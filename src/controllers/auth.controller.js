@@ -1,6 +1,6 @@
-const userModel = require("../../models/user/user.model")
-const errorModel = require("../../models/error/error.model")
-const { genPassword, checkPassword, issueJWT } = require("../../lib/utils")
+const userModel = require("../models/user.model")
+const errorModel = require("../models/error.model")
+const { genPassword, checkPassword, issueJWT } = require("../utils")
 
 module.exports = {
   // [POST] /auth/signup
