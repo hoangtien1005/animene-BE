@@ -5,17 +5,19 @@ const { queryDB } = require("../services/database.service")
 class UserModel {
   table = new pgp.helpers.TableName({ table: "User" })
 
-  async findAll() {
-    const queryString = `select * from $(table) where state = $(_public) or state = $(_private) order by user_id `
+  async get(page = 1, perPage = 50) {
+    const queryString = `select * from $(table) where state = $(_public) or state = $(_private) order by user_id limit $(perPage) offset $(offset)`
     const args = {
       table: this.table,
       _public: STATE.PUBLIC,
-      _private: STATE.PRIVATE
+      _private: STATE.PRIVATE,
+      perPage: perPage,
+      offset: page * perPage + 1
     }
     return await queryDB("any", queryString, args)
   }
 
-  async findById(id) {
+  async getById(id) {
     const queryString = `select * from $(table) where user_id = $(id) and state = $(_public) or state = $(_private)`
     const args = {
       table: this.table,
@@ -26,7 +28,7 @@ class UserModel {
     return await queryDB("one", queryString, args)
   }
 
-  async findByEmail(email) {
+  async getByEmail(email) {
     const queryString = `select * from $(table) where email = $(email) and state = $(_public) or state = $(_private)`
     const args = {
       table: this.table,

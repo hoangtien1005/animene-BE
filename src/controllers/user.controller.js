@@ -2,9 +2,9 @@ const userModel = require("../models/user.model")
 const errorModel = require("../models/error.model")
 const { ERROR_CODE } = require("../constants")
 module.exports = {
-  findAll: async (req, res) => {
+  get: async (req, res) => {
     try {
-      const { data } = await userModel.findAll()
+      const { data } = await userModel.get()
       return res.json({ data })
     } catch (err) {
       return res.json(errorModel())
@@ -14,7 +14,7 @@ module.exports = {
     try {
       const { id } = req.params
 
-      const { data } = await userModel.findById(id)
+      const { data } = await userModel.getById(id)
 
       if (!data) return res.json(errorModel(404, "User not found."))
 

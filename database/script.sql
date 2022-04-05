@@ -5,7 +5,7 @@
 -- Dumped from database version 14.1
 -- Dumped by pg_dump version 14.1
 
--- Started on 2022-03-26 17:05:58 +07
+-- Started on 2022-04-05 12:10:51 +07
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -98,6 +98,28 @@ CREATE TABLE public."Favorite" (
 
 
 --
+-- TOC entry 220 (class 1259 OID 17061)
+-- Name: Like_Comment; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public."Like_Comment" (
+    user_id integer NOT NULL,
+    comment_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 219 (class 1259 OID 17056)
+-- Name: Like_Post; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public."Like_Post" (
+    user_id integer NOT NULL,
+    post_id integer NOT NULL
+);
+
+
+--
 -- TOC entry 212 (class 1259 OID 16984)
 -- Name: Post; Type: TABLE; Schema: public; Owner: -
 --
@@ -173,7 +195,7 @@ ALTER TABLE public."User" ALTER COLUMN user_id ADD GENERATED ALWAYS AS IDENTITY 
 
 
 --
--- TOC entry 3624 (class 0 OID 16993)
+-- TOC entry 3640 (class 0 OID 16993)
 -- Dependencies: 214
 -- Data for Name: Category; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -183,7 +205,7 @@ COPY public."Category" (category_id, name, color, state) FROM stdin;
 
 
 --
--- TOC entry 3626 (class 0 OID 17006)
+-- TOC entry 3642 (class 0 OID 17006)
 -- Dependencies: 216
 -- Data for Name: Comment; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -193,7 +215,7 @@ COPY public."Comment" (comment_id, author_id, post_id, parent_id, author_avatar,
 
 
 --
--- TOC entry 3625 (class 0 OID 17000)
+-- TOC entry 3641 (class 0 OID 17000)
 -- Dependencies: 215
 -- Data for Name: Favorite; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -203,7 +225,27 @@ COPY public."Favorite" (user_id, media_id, type, state, image) FROM stdin;
 
 
 --
--- TOC entry 3622 (class 0 OID 16984)
+-- TOC entry 3646 (class 0 OID 17061)
+-- Dependencies: 220
+-- Data for Name: Like_Comment; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public."Like_Comment" (user_id, comment_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3645 (class 0 OID 17056)
+-- Dependencies: 219
+-- Data for Name: Like_Post; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public."Like_Post" (user_id, post_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3638 (class 0 OID 16984)
 -- Dependencies: 212
 -- Data for Name: Post; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -213,7 +255,7 @@ COPY public."Post" (post_id, author_id, author_avatar, title, content, created_a
 
 
 --
--- TOC entry 3628 (class 0 OID 17016)
+-- TOC entry 3644 (class 0 OID 17016)
 -- Dependencies: 218
 -- Data for Name: Post_Category; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -223,7 +265,7 @@ COPY public."Post_Category" (post_id, category_id) FROM stdin;
 
 
 --
--- TOC entry 3620 (class 0 OID 16975)
+-- TOC entry 3636 (class 0 OID 16975)
 -- Dependencies: 210
 -- Data for Name: User; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -233,7 +275,7 @@ COPY public."User" (user_id, email, password, fullname, avatar, role, date_of_bi
 
 
 --
--- TOC entry 3634 (class 0 OID 0)
+-- TOC entry 3652 (class 0 OID 0)
 -- Dependencies: 213
 -- Name: Category_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -242,7 +284,7 @@ SELECT pg_catalog.setval('public."Category_category_id_seq"', 1, false);
 
 
 --
--- TOC entry 3635 (class 0 OID 0)
+-- TOC entry 3653 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: Comment_comment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -251,7 +293,7 @@ SELECT pg_catalog.setval('public."Comment_comment_id_seq"', 1, false);
 
 
 --
--- TOC entry 3636 (class 0 OID 0)
+-- TOC entry 3654 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: Post_post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -260,7 +302,7 @@ SELECT pg_catalog.setval('public."Post_post_id_seq"', 1, false);
 
 
 --
--- TOC entry 3637 (class 0 OID 0)
+-- TOC entry 3655 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: User_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -269,7 +311,7 @@ SELECT pg_catalog.setval('public."User_user_id_seq"', 1, false);
 
 
 --
--- TOC entry 3466 (class 2606 OID 16998)
+-- TOC entry 3474 (class 2606 OID 16998)
 -- Name: Category Category_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -278,7 +320,7 @@ ALTER TABLE ONLY public."Category"
 
 
 --
--- TOC entry 3470 (class 2606 OID 17014)
+-- TOC entry 3478 (class 2606 OID 17014)
 -- Name: Comment Comment_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -287,7 +329,7 @@ ALTER TABLE ONLY public."Comment"
 
 
 --
--- TOC entry 3468 (class 2606 OID 17005)
+-- TOC entry 3476 (class 2606 OID 17005)
 -- Name: Favorite Favorite_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -296,7 +338,25 @@ ALTER TABLE ONLY public."Favorite"
 
 
 --
--- TOC entry 3472 (class 2606 OID 17020)
+-- TOC entry 3484 (class 2606 OID 17065)
+-- Name: Like_Comment Like_Comment_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."Like_Comment"
+    ADD CONSTRAINT "Like_Comment_pkey" PRIMARY KEY (user_id, comment_id);
+
+
+--
+-- TOC entry 3482 (class 2606 OID 17060)
+-- Name: Like_Post Like_Post_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."Like_Post"
+    ADD CONSTRAINT "Like_Post_pkey" PRIMARY KEY (user_id, post_id);
+
+
+--
+-- TOC entry 3480 (class 2606 OID 17020)
 -- Name: Post_Category Post_Category_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -305,7 +365,7 @@ ALTER TABLE ONLY public."Post_Category"
 
 
 --
--- TOC entry 3464 (class 2606 OID 16991)
+-- TOC entry 3472 (class 2606 OID 16991)
 -- Name: Post Post_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -314,7 +374,7 @@ ALTER TABLE ONLY public."Post"
 
 
 --
--- TOC entry 3462 (class 2606 OID 16982)
+-- TOC entry 3470 (class 2606 OID 16982)
 -- Name: User User_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -323,7 +383,7 @@ ALTER TABLE ONLY public."User"
 
 
 --
--- TOC entry 3479 (class 2606 OID 17051)
+-- TOC entry 3491 (class 2606 OID 17051)
 -- Name: Post_Category fk_category_postcategory; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -332,7 +392,7 @@ ALTER TABLE ONLY public."Post_Category"
 
 
 --
--- TOC entry 3477 (class 2606 OID 17041)
+-- TOC entry 3489 (class 2606 OID 17041)
 -- Name: Comment fk_comment_parent; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -341,7 +401,43 @@ ALTER TABLE ONLY public."Comment"
 
 
 --
--- TOC entry 3476 (class 2606 OID 17036)
+-- TOC entry 3495 (class 2606 OID 17081)
+-- Name: Like_Comment fk_likecomment_comment; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."Like_Comment"
+    ADD CONSTRAINT fk_likecomment_comment FOREIGN KEY (comment_id) REFERENCES public."Comment"(comment_id);
+
+
+--
+-- TOC entry 3494 (class 2606 OID 17076)
+-- Name: Like_Comment fk_likecomment_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."Like_Comment"
+    ADD CONSTRAINT fk_likecomment_user FOREIGN KEY (user_id) REFERENCES public."User"(user_id);
+
+
+--
+-- TOC entry 3493 (class 2606 OID 17071)
+-- Name: Like_Post fk_likepost_post; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."Like_Post"
+    ADD CONSTRAINT fk_likepost_post FOREIGN KEY (post_id) REFERENCES public."Post"(post_id);
+
+
+--
+-- TOC entry 3492 (class 2606 OID 17066)
+-- Name: Like_Post fk_likepost_user; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."Like_Post"
+    ADD CONSTRAINT fk_likepost_user FOREIGN KEY (user_id) REFERENCES public."User"(user_id);
+
+
+--
+-- TOC entry 3488 (class 2606 OID 17036)
 -- Name: Comment fk_post_comment; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -350,7 +446,7 @@ ALTER TABLE ONLY public."Comment"
 
 
 --
--- TOC entry 3478 (class 2606 OID 17046)
+-- TOC entry 3490 (class 2606 OID 17046)
 -- Name: Post_Category fk_post_postcategory; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -359,7 +455,7 @@ ALTER TABLE ONLY public."Post_Category"
 
 
 --
--- TOC entry 3473 (class 2606 OID 17021)
+-- TOC entry 3485 (class 2606 OID 17021)
 -- Name: Post fk_post_user; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -368,7 +464,7 @@ ALTER TABLE ONLY public."Post"
 
 
 --
--- TOC entry 3475 (class 2606 OID 17031)
+-- TOC entry 3487 (class 2606 OID 17031)
 -- Name: Comment fk_user_comment; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -377,7 +473,7 @@ ALTER TABLE ONLY public."Comment"
 
 
 --
--- TOC entry 3474 (class 2606 OID 17026)
+-- TOC entry 3486 (class 2606 OID 17026)
 -- Name: Favorite fk_user_favorite; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -385,7 +481,7 @@ ALTER TABLE ONLY public."Favorite"
     ADD CONSTRAINT fk_user_favorite FOREIGN KEY (user_id) REFERENCES public."User"(user_id);
 
 
--- Completed on 2022-03-26 17:06:06 +07
+-- Completed on 2022-04-05 12:10:52 +07
 
 --
 -- PostgreSQL database dump complete
