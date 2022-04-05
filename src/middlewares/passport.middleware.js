@@ -17,7 +17,7 @@ module.exports = (app) => {
       const exp = jwt_payload.exp
 
       try {
-        const { data } = await userModel.findById(id)
+        const { data } = await userModel.getById(id)
         console.log("user", data)
         if (data) return done(null, data)
         else return done(null, false)

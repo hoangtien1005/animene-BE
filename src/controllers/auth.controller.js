@@ -11,14 +11,12 @@ module.exports = {
       if (!email || !password)
         return res.json(errorModel(400, "Missing required credentials."))
 
-      const response = await userModel.findByEmail(email)
-
-      console.log(response)
+      const response = await userModel.getByEmail(email)
 
       if (response.data)
         return res.json(errorModel(400, "User already exists."))
 
-      const hashPassword = genPassword(password)
+      const hashPassword = await genPassword(password)
 
       const { data: user } = await userModel.create({
         email,
@@ -40,11 +38,11 @@ module.exports = {
       if (!email || !password)
         return res.json(errorModel(400, "Missing required credentials."))
 
-      const { data: user } = await userModel.findByEmail(email)
+      const { data: user } = await userModel.getByEmail(email)
 
       if (!user) return res.json(errorModel(400, "User not found."))
 
-      const isValid = checkPassword(password, user.password)
+      const isValid = await checkPassword(password, user.password)
 
       if (!isValid) return res.json(errorModel(400, "Invalid credentials."))
 

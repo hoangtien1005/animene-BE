@@ -12,7 +12,7 @@ class UserModel {
       _public: STATE.PUBLIC,
       _private: STATE.PRIVATE,
       perPage: perPage,
-      offset: page * perPage + 1
+      offset: (page - 1) * perPage
     }
     return await queryDB("any", queryString, args)
   }
@@ -40,10 +40,9 @@ class UserModel {
   }
 
   async create({ email, password }) {
-    const queryString = `insert into $(table)(email, password) values($email, $password)`
+    const queryString = `insert into $(table)(email, password) values($(email), $(password)) returning *`
     const args = {
       table: this.table,
-      id: id,
       email,
       password
     }
