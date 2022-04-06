@@ -1,10 +1,10 @@
-const { SECRET, ERROR_CODE } = require("../constants")
+const { SECRET } = require("../constants")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 module.exports = {
   /**
    *
-   * @param {*} password password got from input
+   * @param {password} password got from input
    * @returns hashed password
    */
   genPassword: async (password) => {
@@ -14,8 +14,8 @@ module.exports = {
 
   /**
    *
-   * @param {*} password password got from input
-   * @param {*} db_password password stored in db
+   * @param {password} password got from input
+   * @param {db_password} password stored in db
    * @returns if 2 passwords are match
    */
   checkPassword: async (password, db_password) => {
@@ -27,7 +27,7 @@ module.exports = {
 
   /**
    *
-   * @param {*} payload { email, id } user's email and id
+   * @param {payload} { email, id } user's email and id
    * @returns token
    */
   issueJWT: ({ email, id }) => {

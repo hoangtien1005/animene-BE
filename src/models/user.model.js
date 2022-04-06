@@ -1,4 +1,4 @@
-const { db, pgp } = require("../config/db.config")
+const { pgp } = require("../config/db.config")
 const { STATE } = require("../constants")
 const { queryDB } = require("../services/database.service")
 

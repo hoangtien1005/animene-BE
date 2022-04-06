@@ -3,9 +3,9 @@ const { ERROR_CODE } = require("../constants")
 module.exports = {
   /**
    *
-   * @param {*} method pg-promise methods
-   * @param {*} queryString raw query string
-   * @param {*} args arguments of the query string
+   * @param {method} pg-promise methods
+   * @param {queryString} raw query string
+   * @param {args} arguments of the query string
    * @returns success: query result, error: the query result error code
    */
   queryDB: async (method, queryString, args) => {
