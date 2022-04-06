@@ -6,7 +6,10 @@ class UserModel {
   table = new pgp.helpers.TableName({ table: "User" })
 
   async get(page = 1, perPage = 50) {
-    const queryString = `select * from $(table) where state = $(_public) or state = $(_private) order by user_id limit $(perPage) offset $(offset)`
+    const queryString = `
+      select * from $(table) where state = $(_public) or state = $(_private)
+      order by user_id limit $(perPage) offset $(offset)
+    `
     const args = {
       table: this.table,
       _public: STATE.PUBLIC,
@@ -59,16 +62,20 @@ class UserModel {
     return await queryDB("none", queryString, args)
   }
 
-  //   async update(category) {
-  //     const queryString = `
-  //        update $(table) set name = $(name) where category_id = $(id)
-  //     `
-  //     await db.none(queryString, {
-  //       table: this.table,
-  //       id: category.category_id,
-  //       name: category.name
-  //     })
-  //   }
+  async update(user) {
+    const queryString = `
+         update $(table) set email = $(email), password = $(password),
+         fullname = $(fullname), avatar = $(avatar), date_of_birth = $(date_of_birth),
+         role = $(role), state = $(state) where user_id = $(user_id)
+         returning *
+      `
+
+    const args = {
+      table: this.table,
+      ...user
+    }
+    return await queryDB("one", queryString, args)
+  }
 }
 
 module.exports = new UserModel()

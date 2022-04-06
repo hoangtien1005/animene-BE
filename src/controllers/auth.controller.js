@@ -52,5 +52,34 @@ module.exports = {
     } catch (err) {
       return res.json(errorModel())
     }
+  },
+  // [POST] /auth/reset-password
+  resetPassword: async (req, res) => {
+    try {
+      const { email, newPassword } = req.body
+
+      if (!email || !newPassword)
+        return res.json(errorModel(400, "Missing required credentials."))
+
+      const { data: user } = await userModel.getByEmail(email)
+
+      if (!user) return res.json(errorModel(400, "User not found."))
+
+      const hashPassword = await genPassword(newPassword)
+
+      const { data: updatedUser } = await userModel.update({
+        ...user,
+        password: hashPassword
+      })
+
+      const token = issueJWT({
+        email: updatedUser.email,
+        id: updatedUser.user_id
+      })
+
+      return res.json({ data: { user: updatedUser, token } })
+    } catch (err) {
+      return res.json(errorModel())
+    }
   }
 }

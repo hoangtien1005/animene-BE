@@ -20,7 +20,10 @@ module.exports = {
       // error caused by the query result
       if (isQueryError !== undefined) return { error_code: err.code }
       // syntax error, connection error, ...
-      else throw new Error(err.message)
+      else {
+        console.log(err)
+        throw new Error(err.message)
+      }
     }
   }
 }
