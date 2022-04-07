@@ -29,7 +29,6 @@ module.exports = {
   // [POST] /category
   create: async (req, res) => {
     try {
-      console.log(req.body)
       const { data } = await categoryModel.create(req.body)
 
       if (!data) return res.json(errorModel(400, "Category already exists."))
@@ -69,7 +68,7 @@ module.exports = {
 
       await categoryModel.deleteById(id)
 
-      return res.json({ data })
+      return res.json({ data: "Deleted successfully" })
     } catch (err) {
       return res.json(errorModel())
     }

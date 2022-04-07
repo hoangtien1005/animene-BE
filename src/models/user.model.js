@@ -4,6 +4,7 @@ const { queryDB } = require("../services/database.service")
 
 class UserModel {
   table = new pgp.helpers.TableName({ table: "User" })
+  favoriteTable = new pgp.helpers.TableName({ table: "Favorite" })
 
   async get(page = 1, perPage = 50) {
     const queryString = `
@@ -20,8 +21,32 @@ class UserModel {
     return await queryDB("any", queryString, args)
   }
 
+  // TODO: create methods for getting user overview
+  // async getById(id) {
+
+  //   // const queryString = `
+  //   //   select * from
+  //   //   $(table) U left outer join $(favoriteTable) F on U.user_id = F.user_id
+  //   //   where U.user_id = $(id) and U.state = $(_public) or U.state = $(_private)
+  //   // `
+
+  //   // const queryString = `
+  //   // select * from $(table), $(favoriteTable)
+  //   // where $(table).user_id = $(id) and $(table).state = $(_public) or $(table).state = $(_private)`
+  //   const args = {
+  //     table: this.table,
+  //     favoriteTable: this.favoriteTable,
+  //     id: id,
+  //     _public: STATE.PUBLIC,
+  //     _private: STATE.PRIVATE
+  //   }
+  //   return await queryDB("one", queryString, args)
+  // }
+
   async getById(id) {
-    const queryString = `select * from $(table) where user_id = $(id) and state = $(_public) or state = $(_private)`
+    const queryString = `
+    select * from $(table)
+    where user_id = $(id) and state = $(_public) or state = $(_private)`
     const args = {
       table: this.table,
       id: id,
