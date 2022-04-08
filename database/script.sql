@@ -5,7 +5,7 @@
 -- Dumped from database version 14.1
 -- Dumped by pg_dump version 14.1
 
--- Started on 2022-04-05 12:10:51 +07
+-- Started on 2022-04-08 11:50:49 +07
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -92,7 +92,6 @@ CREATE TABLE public."Favorite" (
     user_id integer NOT NULL,
     media_id integer NOT NULL,
     type character varying(20) NOT NULL,
-    state character varying(10) DEFAULT 'public'::character varying,
     image character varying(256) NOT NULL
 );
 
@@ -171,11 +170,12 @@ CREATE TABLE public."User" (
     user_id integer NOT NULL,
     email character varying(256) NOT NULL,
     password character varying(256) NOT NULL,
-    fullname character varying(256),
     avatar character varying(256),
-    role integer NOT NULL,
+    role integer DEFAULT 1 NOT NULL,
     date_of_birth timestamp with time zone,
-    state character varying(10) DEFAULT 'public'::character varying NOT NULL
+    state character varying(10) DEFAULT 'public'::character varying NOT NULL,
+    about text,
+    username character varying(256)
 );
 
 
@@ -201,76 +201,15 @@ ALTER TABLE public."User" ALTER COLUMN user_id ADD GENERATED ALWAYS AS IDENTITY 
 --
 
 COPY public."Category" (category_id, name, color, state) FROM stdin;
-\.
-
-
---
--- TOC entry 3642 (class 0 OID 17006)
--- Dependencies: 216
--- Data for Name: Comment; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public."Comment" (comment_id, author_id, post_id, parent_id, author_avatar, content, created_at, updated_at, state) FROM stdin;
-\.
-
-
---
--- TOC entry 3641 (class 0 OID 17000)
--- Dependencies: 215
--- Data for Name: Favorite; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public."Favorite" (user_id, media_id, type, state, image) FROM stdin;
-\.
-
-
---
--- TOC entry 3646 (class 0 OID 17061)
--- Dependencies: 220
--- Data for Name: Like_Comment; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public."Like_Comment" (user_id, comment_id) FROM stdin;
-\.
-
-
---
--- TOC entry 3645 (class 0 OID 17056)
--- Dependencies: 219
--- Data for Name: Like_Post; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public."Like_Post" (user_id, post_id) FROM stdin;
-\.
-
-
---
--- TOC entry 3638 (class 0 OID 16984)
--- Dependencies: 212
--- Data for Name: Post; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public."Post" (post_id, author_id, author_avatar, title, content, created_at, updated_at, state) FROM stdin;
-\.
-
-
---
--- TOC entry 3644 (class 0 OID 17016)
--- Dependencies: 218
--- Data for Name: Post_Category; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public."Post_Category" (post_id, category_id) FROM stdin;
-\.
-
-
---
--- TOC entry 3636 (class 0 OID 16975)
--- Dependencies: 210
--- Data for Name: User; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public."User" (user_id, email, password, fullname, avatar, role, date_of_birth, state) FROM stdin;
+1	general	#18c1f0	public
+2	anime	#18c1f0	public
+3	manga	#18c1f0	public
+4	news	#18c1f0	public
+5	music	#18c1f0	public
+6	light novels	#18c1f0	public
+7	recommendations	#18c1f0	public
+8	site feedback	#18c1f0	public
+9	bug reports	#18c1f0	public
 \.
 
 
@@ -280,7 +219,7 @@ COPY public."User" (user_id, email, password, fullname, avatar, role, date_of_bi
 -- Name: Category_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Category_category_id_seq"', 1, false);
+SELECT pg_catalog.setval('public."Category_category_id_seq"', 9, true);
 
 
 --
@@ -307,7 +246,7 @@ SELECT pg_catalog.setval('public."Post_post_id_seq"', 1, false);
 -- Name: User_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."User_user_id_seq"', 1, false);
+SELECT pg_catalog.setval('public."User_user_id_seq"', 5, true);
 
 
 --
@@ -481,7 +420,7 @@ ALTER TABLE ONLY public."Favorite"
     ADD CONSTRAINT fk_user_favorite FOREIGN KEY (user_id) REFERENCES public."User"(user_id);
 
 
--- Completed on 2022-04-05 12:10:52 +07
+-- Completed on 2022-04-08 11:50:50 +07
 
 --
 -- PostgreSQL database dump complete
