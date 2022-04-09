@@ -18,7 +18,6 @@ module.exports = (app) => {
 
       try {
         const { data } = await userModel.getById(id)
-        console.log("user", data)
         if (data) return done(null, data)
         else return done(null, false)
       } catch (error) {

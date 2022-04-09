@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 module.exports = {
   /**
-   *
+   * Generate a hashed string from the input password
    * @param {string} password - password got from input
    * @returns hashed password
    */
@@ -13,10 +13,10 @@ module.exports = {
   },
 
   /**
-   *
+   * Check if 2 passwords are matched
    * @param {string} password -  password got from input
    * @param {string} db_password -  password stored in db
-   * @returns if 2 passwords are match
+   * @returns if 2 passwords are matched
    */
   checkPassword: async (password, db_password) => {
     const isValid = await bcrypt
@@ -26,9 +26,9 @@ module.exports = {
   },
 
   /**
-   *
+   * Issue the user's email and id
    * @param {Object} payload - user's email and id
-   * @returns {string} token
+   * @returns {string} user token
    */
   issueJWT: ({ email, id }) => {
     const expiresIn = "30s" // for testing

@@ -2,7 +2,7 @@ const { db } = require("../config/db.config")
 const { ERROR_CODE } = require("../constants")
 module.exports = {
   /**
-   *
+   * General function to query the database
    * @param {string} method - pg-promise methods
    * @param {string} queryString - raw query string
    * @param {Object} args -  arguments of the query string
