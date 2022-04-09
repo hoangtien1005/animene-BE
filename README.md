@@ -1,74 +1,84 @@
-# animene-server
-Animene backend server
+# animene-BE
+The back-end server for auth and social pages
 
-# API Endpoints:
+# Current API Endpoints:
 
 ## Auth
 
-**[POST]**  ```/auth/login```  &nbsp;&nbsp;  _Login user_
+**[POST]**  ```/auth/login```  &nbsp;&nbsp;  Login user
 <br>
 
-**[POST]**  ```/auth/signup```  &nbsp;&nbsp;  _Signup user_
+**[POST]**  ```/auth/signup```  &nbsp;&nbsp;  Signup user
 <br>
 
-**[POST]**  ```/auth/reset-password```  &nbsp;&nbsp;  _Reset user password_
+**[POST]**  ```/auth/reset-password```  &nbsp;&nbsp;  Reset user password
+<br>
+
 <br>
 
 ## User
 
-**[GET]**  ```/user?page=1&perPage=50```  &nbsp;&nbsp;  _Get a list of users_
+**[GET]**  ```/user?page=1&perPage=50```  &nbsp;&nbsp;  Get a list of users
 <br>
 
-**[GET]**  ```/user/:id```  &nbsp;&nbsp;  _Get a user by id_
+**[GET]**  ```/user/:id```  &nbsp;&nbsp;  Get a user by id
 <br>
 
-**[PUT]**  ```/user/:id```  &nbsp;&nbsp;  _Update the current user_
+**[PUT]**  ```/user/:id```  &nbsp;&nbsp;  Update the current user
 <br>
 
-**[DELETE]**  ```/user/:id```  &nbsp;&nbsp;  _Delete the current user_
+**[DELETE]**  ```/user/:id```  &nbsp;&nbsp;  Delete the current user
 <br>
 
-**[GET]**  ```/user/:id/favorites?page=1&perPage=50```  &nbsp;&nbsp;  _Get a list of user favorites media_
 <br>
 
-**[POST]**  ```/user/:id/favorites```  &nbsp;&nbsp;  _Create a new favorites media_
+**[GET]**  ```/user/:id/favorites?page=1&perPage=50```  &nbsp;&nbsp;  Get a list of user favorites media
 <br>
 
-**[DELETE]**  ```/user/:id/favorites/:media_id```  &nbsp;&nbsp;  _Delete the current favorites media_
+**[POST]**  ```/user/:id/favorites```  &nbsp;&nbsp;  Create a new favorites media
 <br>
 
-## Post
-
-**[GET]**  ```/post?page=1&perPage=50```  &nbsp;&nbsp;  _Get a list of posts_
+**[DELETE]**  ```/user/:id/favorites/:media_id```  &nbsp;&nbsp;  Delete the current favorites media
 <br>
 
-**[GET]**  ```/post/:id```  &nbsp;&nbsp;  _Get a post by id_
 <br>
 
-**[PUT]**  ```/post/:id```  &nbsp;&nbsp;  _Update the current post_
+<!-- ## Post
+
+**[GET]**  ```/post?page=1&perPage=50```  &nbsp;&nbsp;  Get a list of posts
 <br>
 
-**[DELETE]**  ```/post/:id```  &nbsp;&nbsp;  _Delete the current post_
+**[GET]**  ```/post/:id```  &nbsp;&nbsp;  Get a post by id
+<br>
+
+**[PUT]**  ```/post/:id```  &nbsp;&nbsp;  Update the current post
+<br>
+
+**[DELETE]**  ```/post/:id```  &nbsp;&nbsp;  Delete the current post
+<br> -->
+
 <br>
 
 ## Favorites
 
-**[GET]**  ```/favorites?page=1&perPage=50```  &nbsp;&nbsp;  _Get a list of all favorites media_
+**[GET]**  ```/favorites?page=1&perPage=50```  &nbsp;&nbsp;  Get a list of all favorites media
+<br>
+
 <br>
 
 ## Category
 
-**[GET]**  ```/category?page=1&perPage=50```  &nbsp;&nbsp;  _Get a list of categories_
+**[GET]**  ```/category?page=1&perPage=50```  &nbsp;&nbsp;  Get a list of categories
 <br>
 
-**[GET]**  ```/category/:id```  &nbsp;&nbsp;  _Get a category by id_
+**[GET]**  ```/category/:id```  &nbsp;&nbsp;  Get a category by id
 <br>
 
-**[POST]**  ```/category/```  &nbsp;&nbsp;  _Create a new category_
+**[POST]**  ```/category/```  &nbsp;&nbsp;  Create a new category
 <br>
 
-**[PUT]**  ```/category/:id```  &nbsp;&nbsp;  _Update the current category_
+**[PUT]**  ```/category/:id```  &nbsp;&nbsp;  Update the current category
 <br>
 
-**[DELETE]**  ```/category/:id```  &nbsp;&nbsp;  _Delete the current category_
+**[DELETE]**  ```/category/:id```  &nbsp;&nbsp;  Delete the current category
 <br>
