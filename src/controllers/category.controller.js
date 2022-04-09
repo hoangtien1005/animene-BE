@@ -1,17 +1,23 @@
 const categoryModel = require("../models/category.model")
 const errorModel = require("../models/error.model")
 const { ERROR_CODE } = require("../constants")
-
+const { formatResponseData } = require("../utils")
 module.exports = {
   // [GET] /category
   get: async (req, res) => {
     try {
-      const { data } = await categoryModel.get()
+      const { page = 1, perPage = 50 } = req.query
+
+      const { data: documents } = await categoryModel.get(page, perPage)
+
+      const data = formatResponseData(page, perPage, documents)
+
       return res.json({ data })
     } catch (err) {
       return res.json(errorModel())
     }
   },
+
   // [GET] /category/:id
   getById: async (req, res) => {
     try {
@@ -26,6 +32,7 @@ module.exports = {
       return res.json(errorModel())
     }
   },
+
   // [POST] /category
   create: async (req, res) => {
     try {
@@ -38,6 +45,7 @@ module.exports = {
       return res.json(errorModel())
     }
   },
+
   // [PUT] /category/:id
   update: async (req, res) => {
     try {
@@ -57,6 +65,7 @@ module.exports = {
       return res.json(errorModel())
     }
   },
+
   // [DELETE] /category/:id
   destroy: async (req, res) => {
     try {

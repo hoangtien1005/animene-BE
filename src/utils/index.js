@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken")
 module.exports = {
   /**
    *
-   * @param {password} password got from input
+   * @param {string} password - password got from input
    * @returns hashed password
    */
   genPassword: async (password) => {
@@ -14,8 +14,8 @@ module.exports = {
 
   /**
    *
-   * @param {password} password got from input
-   * @param {db_password} password stored in db
+   * @param {string} password -  password got from input
+   * @param {string} db_password -  password stored in db
    * @returns if 2 passwords are match
    */
   checkPassword: async (password, db_password) => {
@@ -27,8 +27,8 @@ module.exports = {
 
   /**
    *
-   * @param {payload} { email, id } user's email and id
-   * @returns token
+   * @param {Object} payload - user's email and id
+   * @returns {string} token
    */
   issueJWT: ({ email, id }) => {
     const expiresIn = "30s" // for testing
@@ -42,5 +42,26 @@ module.exports = {
     const signedToken = jwt.sign(payload, SECRET, { expiresIn })
 
     return signedToken
+  },
+
+  /**
+   * Format the documents returned from queries
+   * @param {number} page - The page to fetch
+   * @param {number} perPage - The results count on each page
+   * @param {Array} documents - The documents returned from queries
+   * @returns {Object|Array} the response object or an empty array
+   */
+  formatResponseData: (page, perPage, documents) => {
+    if (documents.length === 0) return documents
+
+    const data = { page: parseInt(page), perPage: parseInt(perPage) }
+    data.totalCount = parseInt(documents[0].full_count)
+    data.totalPage = Math.ceil(data.totalCount / perPage)
+
+    data.documents = documents.map((item) => {
+      delete item.full_count
+      return item
+    })
+    return data
   }
 }

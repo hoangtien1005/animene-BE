@@ -8,14 +8,15 @@ class UserModel {
 
   async get(page = 1, perPage = 50) {
     const queryString = `
-      select * from $(table) where state = $(_public) or state = $(_private)
+      select *, count(*) over() as full_count
+      from $(table) where state = $(_public) or state = $(_private)
       order by user_id limit $(perPage) offset $(offset)
     `
     const args = {
       table: this.table,
       _public: STATE.PUBLIC,
       _private: STATE.PRIVATE,
-      perPage: perPage,
+      perPage: Math.max(perPage, 50),
       offset: (page - 1) * perPage
     }
     return await queryDB("any", queryString, args)

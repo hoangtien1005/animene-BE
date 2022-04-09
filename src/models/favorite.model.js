@@ -23,7 +23,7 @@ class FavoriteModel {
 
   async getFavoriteByUserId(id, page = 1, perPage = 50) {
     const queryString = `
-    select * from $(table)
+    select * from $(table), count(*) over() as full_count
     where user_id = $(id)
     limit $(perPage) offset $(offset)`
     const args = {

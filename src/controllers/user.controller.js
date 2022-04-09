@@ -2,11 +2,18 @@ const userModel = require("../models/user.model")
 const favoriteModel = require("../models/favorite.model")
 const errorModel = require("../models/error.model")
 const { ERROR_CODE } = require("../constants")
+const { formatResponseData } = require("../utils")
+
 module.exports = {
   // [GET] /user
   get: async (req, res) => {
     try {
-      const { data } = await userModel.get()
+      const { page = 1, perPage = 50 } = req.query
+
+      const { data: documents } = await userModel.get(page, perPage)
+
+      const data = formatResponseData(page, perPage, documents)
+
       return res.json({ data })
     } catch (err) {
       return res.json(errorModel())
@@ -40,6 +47,7 @@ module.exports = {
       return res.json(errorModel())
     }
   },
+
   // [POST] /user/:id/favorites
   createUserFavorite: async (req, res) => {
     try {
@@ -54,6 +62,7 @@ module.exports = {
       return res.json(errorModel())
     }
   },
+
   // [DELETE] /user/:id/favorites/:media_id
   destroyUserFavorite: async (req, res) => {
     try {
